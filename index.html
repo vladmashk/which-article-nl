@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Which Article NL</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .buttonDiv {
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        #article {
+            margin-top: 10px;
+            font-size: 2em;
+            text-align: center;
+            text-transform: capitalize;
+        }
+    </style>
+</head>
+<body>
+<h1>Which article does the given Dutch noun use?</h1>
+
+<label>
+    Enter word here
+    <input id="wordInput">
+</label>
+<div class="buttonDiv">
+    <button id="runButton">Check</button>
+</div>
+
+
+<div id="article">
+
+</div>
+
+<script type="module">
+    async function run() {
+        const wordInput = document.getElementById("wordInput");
+        const word = wordInput.value;
+        if (!word) return;
+        const articleDiv = document.getElementById("article");
+        articleDiv.innerText = "Loading..."
+        const response = await fetch(`https://faas-ams3-2a2df116.doserverless.co/api/v1/web/fn-d9ec37b4-a127-467f-9053-54c0cd0e1584/default/get-article?word=${word}`);
+        const {article} = await response.json();
+        articleDiv.innerText = article ?? "Unknown";
+        wordInput.focus();
+    }
+
+    document.getElementById("runButton").onclick = run;
+    document.getElementById("wordInput").onkeyup = (e) => {
+        if (e.key === "Enter") run();
+    }
+</script>
+</body>
+</html>
