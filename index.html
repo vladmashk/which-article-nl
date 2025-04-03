@@ -2,11 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="icon" type="image/png" href="logo.png"/>
     <title>Which Article NL</title>
     <style>
         body {
             font-family: sans-serif;
+        }
+
+        input {
+            font-size: inherit;
         }
 
         h1 {
@@ -22,13 +27,19 @@
 
         .buttonDiv {
             text-align: center;
-            margin-top: 5px;
+            margin-top: 10px;
         }
 
         #article {
             margin-top: 10px;
             font-size: 2em;
             text-align: center;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                color-scheme: dark;
+            }
         }
     </style>
 </head>
@@ -43,10 +54,7 @@
     <button id="runButton">Check</button>
 </div>
 
-<div id="word"></div>
-<div id="article">
-
-</div>
+<div id="article"></div>
 
 <script type="module">
     document.getElementById("wordInput").focus();
